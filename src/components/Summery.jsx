@@ -16,7 +16,12 @@ export default function Summery({totalMovies, watchedCount, unwatchedCount}){
             <span>To Watch</span>
         </div>
         </div>
+
+            {unwatchedCount === 0 && totalMovies > 0 &&(
+            <p className="statsP">You have watched everything!</p>
+        )}
         
         </section>
     );
 }
+
