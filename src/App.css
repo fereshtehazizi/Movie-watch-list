@@ -312,3 +312,8 @@ ul {
   display: block;
   font-family: "lily script one";
 }
+
+.statsP{
+  text-align: center;
+  margin-top: 20px;
+}
