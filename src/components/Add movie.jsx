@@ -3,17 +3,25 @@ export default function AddMovie({ title, setTitle, genre, setGenre, setSrc, han
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        if (file) {
-            setSrc(URL.createObjectURL(file));
-        }
+
+        if (!file) return;
+
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            setSrc(reader.result);
+        };
+
+        reader.readAsDataURL(file);
     };
+
 
     return (
         <section>
             <h1 className="headSubtitle">Add Movie</h1>
 
             <form onSubmit={handleAddMovie}>
-                {/* TITLE */}
+
                 <label htmlFor="title">Movie Title</label>
                 <input
                     id="title"
@@ -25,7 +33,7 @@ export default function AddMovie({ title, setTitle, genre, setGenre, setSrc, han
 
                 <div className="inputRow">
                     <div className="inputGroup">
-                        {/* FILE UPLOAD */}
+
                         <label htmlFor="imageFile">Upload Image</label>
                         <input
                             id="imageFile"
@@ -35,7 +43,7 @@ export default function AddMovie({ title, setTitle, genre, setGenre, setSrc, han
                         />
                     </div>
                     <div className="inputGroup">
-                        {/* GENRE */}
+
                         <label htmlFor="genre">Genre</label>
                         <select
                             id="genre"
