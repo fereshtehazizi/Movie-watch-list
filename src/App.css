@@ -266,23 +266,36 @@ ul {
   display: flex;
   flex-direction: row;
   width: 100%;
-  gap: 35px;
+  gap: 10px;
   justify-content: start;
 
 }
 
-.movieCard .button button {
-  padding: 15px;
+.movieCard .button button:first-child {
+  width: 60%;
+  padding: 12px;
   border-radius: 10px;
   border: none;
   background: var(--content-bg);
   color: var(--text-main);
   cursor: pointer;
-  margin: 2px;
+  margin-top: 5px;
   font-family: "lily script one";
   font-size: 15px;
 }
 
+.movieCard .button button:last-child {
+  width: 30%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: var(--content-bg);
+  color: var(--text-main);
+  cursor: pointer;
+  margin-top: 5px;
+  font-family: "lily script one";
+  font-size: 15px;
+}
 
 
 /* ---------- SUMMARY ---------- */
