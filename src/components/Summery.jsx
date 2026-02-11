@@ -20,8 +20,13 @@ export default function Summery({totalMovies, watchedCount, unwatchedCount}){
             {unwatchedCount === 0 && totalMovies > 0 &&(
             <p className="statsP">You have watched everything!</p>
         )}
+
+            {totalMovies === 0 &&(
+            <p className="statsP">No movies found. Add one!</p>
+        )}
         
         </section>
     );
 }
+
 
