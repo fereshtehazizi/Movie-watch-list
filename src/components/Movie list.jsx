@@ -22,9 +22,9 @@ export default function MovieList({filteredMovies, toggleWatched, deleteMovie, s
                             <img src={movie.src} alt={movie.title} className="img" />
                             <h3>{movie.title}</h3>
                             <p>Genre: {movie.genre}</p>
-                            <p>Status: {movie.watched ? "watched" : "Unwatched"}</p>
-                            <div>
-                                <button onClick={() => toggleWatched(movie.id)} disabled={movie.watched}>{movie.watched ? "Watched" : "Mark Watched"}</button>
+                            <p>Status: {movie.watched ? "Have Watched" : "Unwatched"}</p>
+                            <div className="button">
+                                <button onClick={() => toggleWatched(movie.id)}>{movie.watched ? "To Watch" : "Have Watched"}</button>
                                 <button onClick={() => deleteMovie(movie.id)}><i className="fa fa-trash"></i></button>
                             </div>
                     </li>
