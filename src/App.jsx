@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import AddMovie from "./components/Add movie";
 import MovieList from "./components/Movie list";
@@ -6,18 +6,27 @@ import Summery from "./components/Summery"
 
 function App() {
 
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(() => {
+    const savedMovies = localStorage.getItem("movies");
+    return savedMovies ? JSON.parse(savedMovies) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("movies", JSON.stringify(movies));
+  }, [movies]);
+
   const [title, setTitle] = useState("");
   const [src, setSrc] = useState("");
   const [genre, setGenre] = useState("Action");
   const [filter, setFilter] = useState("All");
 
+
   const handleAddMovie = (e) => {
     e.preventDefault();
 
-    if(title.trim() === "") return
+    if (title.trim() === "") return
 
-    const newMovie ={
+    const newMovie = {
       id: crypto.randomUUID(),
       title,
       src,
@@ -34,14 +43,14 @@ function App() {
   const toggleWatched = (id) => {
     setMovies(
       movies.map((movie) =>
-      movie.id === id 
-      ? {...movie, watched: !movie.watched} 
-      : movie
+        movie.id === id
+          ? { ...movie, watched: !movie.watched }
+          : movie
       )
     );
   };
 
-   const deleteMovie = (id) => {
+  const deleteMovie = (id) => {
     setMovies(movies.filter((movie) => movie.id !== id));
   };
 
@@ -50,39 +59,40 @@ function App() {
   const unwatchedCount = totalMovies - watchedCount;
 
   const filteredMovies = movies.filter((movie) => {
-    if(filter === "Watched") return movie.watched;
-    if(filter === "Unwatched") return !movie.watched;
+    if (filter === "Watched") return movie.watched;
+    if (filter === "Unwatched") return !movie.watched;
     return true;
   });
 
-  return(
-  <div className="appContainer">
-    <h1 className="headerTitle">Movie Watchlist</h1>
-    <div className="content">
-      <AddMovie
-      title={title}
-      setTitle={setTitle}
-      src={src}
-      setSrc={setSrc}
-      genre={genre}
-      setGenre={setGenre}
-      handleAddMovie={handleAddMovie}
-      ></AddMovie>
+  return (
+    <div className="appContainer">
+      <h1 className="headerTitle">Movie Watchlist</h1>
+      <div className="content">
+        <AddMovie
+          title={title}
+          setTitle={setTitle}
+          src={src}
+          setSrc={setSrc}
+          genre={genre}
+          setGenre={setGenre}
+          handleAddMovie={handleAddMovie}
+        ></AddMovie>
+        <Summery
+          totalMovies={totalMovies}
+          watchedCount={watchedCount}
+          unwatchedCount={unwatchedCount}
+        ></Summery>
 
-      <MovieList
-      filteredMovies={filteredMovies}
-      toggleWatched={toggleWatched}
-      deleteMovie={deleteMovie}
-      setFilter={setFilter}
-      filter={filter}
-      ></MovieList>
+        <MovieList
+          filteredMovies={filteredMovies}
+          toggleWatched={toggleWatched}
+          deleteMovie={deleteMovie}
+          setFilter={setFilter}
+          filter={filter}
+        ></MovieList>
 
-      <Summery
-      totalMovies={totalMovies}
-      watchedCount={watchedCount}
-      unwatchedCount={unwatchedCount}
-      ></Summery>
-    </div>
+
+      </div>
     </div>
   );
 
