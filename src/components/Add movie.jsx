@@ -53,6 +53,7 @@ export default function AddMovie({ title, setTitle, genre, setGenre, setSrc, han
                             <option>Action</option>
                             <option>Drama</option>
                             <option>Comedy</option>
+                            <option>Horror</option>
                             <option>Mystery</option>
                             <option>Sci-Fi</option>
                             <option>Animation</option>
@@ -64,3 +65,4 @@ export default function AddMovie({ title, setTitle, genre, setGenre, setSrc, han
         </section>
     );
 }
+
