@@ -1,6 +1,7 @@
 {
   "name": "movie-list",
   "private": true,
+  "homepage": "https://github.com/fereshtehazizi/Movie-watch-list",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
