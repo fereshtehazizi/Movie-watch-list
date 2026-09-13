@@ -1,24 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
 import AddMovie from "./components/Add movie";
 import MovieList from "./components/Movie list";
-import Summery from "./components/Summery"
+import Summery from "./components/Summery";
+import useLocalStorageState from "./hooks/useLocalStorageState";
 
 function App() {
 
-  const [movies, setMovies] = useState(() => {
-    const savedMovies = localStorage.getItem("movies");
-    return savedMovies ? JSON.parse(savedMovies) : [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem("movies", JSON.stringify(movies));
-  }, [movies]);
+  // Movies and the selected filter survive refreshes / closing the browser.
+  const [movies, setMovies] = useLocalStorageState("movies", []);
+  const [filter, setFilter] = useLocalStorageState("filter", "All");
 
   const [title, setTitle] = useState("");
   const [src, setSrc] = useState("");
   const [genre, setGenre] = useState("Action");
-  const [filter, setFilter] = useState("All");
 
 
   const handleAddMovie = (e) => {
